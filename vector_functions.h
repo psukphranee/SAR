@@ -1,5 +1,9 @@
+#ifndef vector_functions
+#define vector_functions
+
 #include <cmath>
 #include <vector>
+#include "scalar_functions.h"
 
 using namespace std;
 
@@ -23,9 +27,11 @@ vector<double> linspace(double min, double max, int n)
 	return result;
 }
 
-//callback function for squaring array
-static inline double computeSquare (double x) { return x*x; }
+//examples of vector functions
+//std::transform(result.begin(), result.end(), result_temp.begin(), result.begin(), std::plus<double>());
 //std::transform(Array2.begin(), Array2.end(), Array2.begin(), computeSquare);
+//transform(v.begin(), v.end(), v.begin(), [k](int &c){ return c*k; });
+//std::transform(test1.begin(), test1.end(), test2.begin(), test3.begin(), std::plus<double>()); test3=test1+test2
 
 vector<double> const_times_vector(vector<double> &input, double constant){
     
@@ -37,3 +43,5 @@ vector<double> const_times_vector(vector<double> &input, double constant){
 
     return temp;
 }
+
+#endif
