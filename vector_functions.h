@@ -44,4 +44,14 @@ vector<double> const_times_vector(vector<double> &input, double constant){
     return temp;
 }
 
+vector<double> vector_modulus_const(vector<double> &input, double constant){
+    
+    vector<double> temp;
+
+    for (auto i : input){
+        temp.push_back(fmod(i, constant));
+    }
+
+    return temp;
+}
 #endif

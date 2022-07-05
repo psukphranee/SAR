@@ -22,10 +22,12 @@ vector<double> generate_pulse_envelope(vector<double> &time_array, double pulse_
     double tau = pulse_width; 
     double tau_half = tau/2;
 
+    //cout << A << " " << tau <<  " " << tau_half << endl;
+
     for(size_t i = 0; i < time_array.size(); ++i){
         chi[i] = A * (abs((t[i]-tau_half)/tau_half) <= 1);
     }
-
+    //outputVector(chi);
     return chi;
 }
 
@@ -54,6 +56,7 @@ vector<double> generate_pulse_wave(vector<double> &time_array, double chirp_rate
 
     //create alias to be consistent with python code
     vector<double> &LFM = arg1;
+    //outputVector(arg1);
     return LFM;
 }
 
@@ -63,7 +66,8 @@ vector<double> generate_LFM_Pulse(vector<double> &time_array, double pulse_width
     vector<double> &t = time_array; //#expected time vector should be preprocessed before passed to this function. pulse and envelope start their sequences at times values of zeros.
 
     //#pulse envelope  ---------------
-    vector<double> chi = generate_pulse_envelope(t, pulse_height, pulse_width);
+    
+    vector<double> chi = generate_pulse_envelope(t, pulse_width, pulse_height);
 
     //#LFM  ---------------
     double k = chirp_rate;
@@ -73,8 +77,8 @@ vector<double> generate_LFM_Pulse(vector<double> &time_array, double pulse_width
 
     //pulse = chi * LFM;
 
-    transform( chi.begin(), chi.end(), LFM.begin(), LFM.begin(),  multiplies<int>() );
-    
+    transform( chi.begin(), chi.end(), LFM.begin(), LFM.begin(),  multiplies<double>() );
+    //outputVector(LFM);   
     return LFM;
 }
 #endif
